@@ -1,5 +1,9 @@
- module ValutecApi
-  class Card
+module ValuetecApi
+   class Card
+
+    def initialize(config_vars)
+    end
+
     def card_balance
     end
 
