@@ -1,22 +1,22 @@
 require 'spec_helper'
 
-describe ValutecApi::Card do
-  let (:valid_card) {ValutecApi::Card.new({card_number: '1234123412341234'})}
-  let (:invalid_card) {ValutecApi::Card.new({card_number: '6666666666666666'})}
+describe Valutec::Card do
+  let (:valid_card) {Valutec::Card.new({card_number: '1234123412341234'})}
+  let (:invalid_card) {Valutec::Card.new({card_number: '6666666666666666'})}
 
   it "raises if client_key and terminal_id are not specified" do
-    expect{ValutecApi::Card.new({client_key: '1234',terminal_id: '4321'})}.to_not raise_error
-    expect{ValutecApi::Card.new({client_key: '1234'})}.to raise_error
-    expect{ValutecApi::Card.new({terminal_id: '4321'})}.to raise_error
-    expect{ValutecApi::Card.new}.to raise_error
+    expect{Valutec::Card.new({client_key: '1234',terminal_id: '4321'})}.to_not raise_error
+    expect{Valutec::Card.new({client_key: '1234'})}.to raise_error
+    expect{Valutec::Card.new({terminal_id: '4321'})}.to raise_error
+    expect{Valutec::Card.new}.to raise_error
 
     ENV['VALUTEC_TERMINAL_ID'] = "derp"
     ENV['VALUTEC_CLIENT_KEY'] = "doop"
 
-    expect{ValutecApi::Card.new({client_key: '1234',terminal_id: '4321'})}.to_not raise_error
-    expect{ValutecApi::Card.new({client_key: '1234'})}.to_not raise_error
-    expect{ValutecApi::Card.new({terminal_id: '4321'})}.to_not raise_error
-    expect{ValutecApi::Card.new}.to_not raise_error
+    expect{Valutec::Card.new({client_key: '1234',terminal_id: '4321'})}.to_not raise_error
+    expect{Valutec::Card.new({client_key: '1234'})}.to_not raise_error
+    expect{Valutec::Card.new({terminal_id: '4321'})}.to_not raise_error
+    expect{Valutec::Card.new}.to_not raise_error
   end
 
   context '#card_balance' do

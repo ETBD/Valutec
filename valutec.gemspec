@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'valutec_api/version'
+require 'valutec/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "valutec_api"
-  spec.version       = ValutecApi::VERSION
+  spec.name          = "valutec"
+  spec.version       = Valutec::VERSION
   spec.authors       = ["Nikky Southerland"]
   spec.email         = ["nikky@ricksteves.com"]
   spec.summary       = %q{Provides a wrapper to the Valutec Gift Card API}
@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "webmock"
 
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rspec-nc"

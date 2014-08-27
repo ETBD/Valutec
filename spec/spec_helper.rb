@@ -1,2 +1,3 @@
 require 'pry'
-require 'valutec_api'
+require 'webmock/rspec'
+require 'valutec'

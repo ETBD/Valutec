@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe ValutecApi do
-  let (:valutec_api) {ValutecApi}
+describe Valutec do
+  let (:valutec) {Valutec}
   it "enables changing of the base_uri" do
-    expect(valutec_api.base_uri).to eq "https://ws.valutec.net/Valutec.asmx"
-    expect(valutec_api.base_uri "https://example.com").to eq "https://example.com"
-    expect(valutec_api.base_uri).to eq "https://example.com"
+    expect(valutec.base_uri).to eq "https://ws.valutec.net/Valutec.asmx"
+    expect(valutec.base_uri "https://example.com").to eq "https://example.com"
+    expect(valutec.base_uri).to eq "https://example.com"
   end
 
   describe "::card" do

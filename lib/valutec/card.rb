@@ -1,6 +1,6 @@
 require 'httparty'
 
-module ValutecApi
+module Valutec
   class Card
     include HTTParty
 

@@ -1,8 +1,8 @@
-require "valutec_api/version"
-require "valutec_api/card"
+require "valutec/version"
+require "valutec/card"
 require 'httparty'
 
-module ValutecApi
+module Valutec
   include HTTParty
   base_uri 'https://ws.valutec.net/Valutec.asmx'
 
