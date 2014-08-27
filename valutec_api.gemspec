@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'valutac_api/version'
+require 'valutec_api/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "valutac_api"
-  spec.version       = ValutacApi::VERSION
+  spec.name          = "valutec_api"
+  spec.version       = ValutecApi::VERSION
   spec.authors       = ["Nikky Southerland"]
   spec.email         = ["nikky@ricksteves.com"]
   spec.summary       = %q{Provides a wrapper to the Valutec Gift Card API}
-  spec.description   = %q{This gem provides a lightweight interface to the Valutec Gift Card HTTP GET API. Additionally supports reporting functionality.}
+  spec.description   = %q{TODO: This gem does things.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
