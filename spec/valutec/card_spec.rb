@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Valutec::Card do
-  let (:valid_card) {Valutec::Card.new({card_number: '1234123412341234'})}
-  let (:invalid_card) {Valutec::Card.new({card_number: '6666666666666666'})}
+  let (:valid_card) {Valutec::Card.new({card_number: '1234-1234-1234-1234-123'})}
+  let (:invalid_card) {Valutec::Card.new({card_number: '6666-6666-6666-6666-123'})}
 
   it "raises if client_key and terminal_id are not specified" do
     expect{Valutec::Card.new({client_key: '1234',terminal_id: '4321'})}.to_not raise_error
@@ -21,6 +21,7 @@ describe Valutec::Card do
 
   context '#card_balance' do
     it "returns card balance as a float if exists" do
+      stub_request(:get, "https://ws.valutec.net/Valutec.asmx/Transaction_CardBalance").to_return(:body => '49.99', :headers => { 'Content-Type' => 'application/json' })
       expect(valid_card.card_balance).to eq 49.99
     end
 

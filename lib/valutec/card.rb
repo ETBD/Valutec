@@ -6,15 +6,26 @@ module Valutec
 
     base_uri 'https://ws.valutec.net/Valutec.asmx'
 
-    attr_accessor :client_key, :terminal_id
+    attr_accessor :client_key, :terminal_id, :server_id, :identifier
+    attr_reader :card_number
 
     def initialize(config_vars={})
       @client_key = get_client_key(config_vars)
       @terminal_id = get_terminal_id(config_vars)
+      @server_id = get_server_id(config_vars)
+      @identifier = config_vars.fetch(:identifier, SecureRandom.hex(5))
+      if config_vars.fetch(:card_number,false)
+        @card_number = normalize_card_number(config_vars[:card_number].to_s)
+      end
     end
 
     def card_balance
-      response = make_api_call('/Transaction_CardBalance')
+      request_params = {
+        "ProgramType" => "Gift",
+        "CardNumber" => card_number,
+      }
+      response = make_api_call('/Transaction_CardBalance',request_params)
+      binding.pry
     end
 
     def add_value
@@ -55,9 +66,24 @@ module Valutec
 
     private
 
+    def normalize_card_number(card_number)
+      card_number.gsub(/\W/,'')
+    end
+
+
     def make_api_call(method,params={})
-      params.merge!({"ClientKey" => client_key, "TerminalID" => terminal_id})
-      self.class.get(method,params)
+      params.merge!({"ClientKey" => client_key,"TerminalID" => terminal_id, "ServerID" => server_id, "Identifier" => identifier})
+      self.class.get(method,{query: params})
+    end
+
+    def get_server_id(config_vars)
+      if config_vars[:server_id]
+        config_vars[:server_id]
+      elsif ENV['VALUTEC_SERVER_ID']
+        ENV['VALUTEC_SERVER_ID']
+      else
+        raise "ENV['VALUTEC_SERVER_ID'] not specified, nor is it included in class initialization"
+      end
     end
 
     def get_client_key(config_vars)
@@ -78,7 +104,6 @@ module Valutec
       else
         raise "ENV['VALUTEC_TERMINAL_ID'] not specified, nor is it included in class initialization"
       end
-
     end
   end
 end
