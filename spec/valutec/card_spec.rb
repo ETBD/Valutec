@@ -12,6 +12,7 @@ describe Valutec::Card do
 
     ENV['VALUTEC_TERMINAL_ID'] = "derp"
     ENV['VALUTEC_CLIENT_KEY'] = "doop"
+    ENV['VALUTEC_SERVER_ID'] = "ferp"
 
     expect{Valutec::Card.new({client_key: '1234',terminal_id: '4321'})}.to_not raise_error
     expect{Valutec::Card.new({client_key: '1234'})}.to_not raise_error
@@ -25,7 +26,7 @@ describe Valutec::Card do
       expect(valid_card.card_balance).to eq 49.99
     end
 
-    it "returns false if card not exist" do
+    it "returns false if card not exist, or has no balance" do
       # expect(.card_balance).to be_false
     end
   end
@@ -36,15 +37,18 @@ describe Valutec::Card do
   end
 
   context "#activate_card" do
-    it "returns things"
+    it "returns true if activation successful"
+    it "returns false if unsuccessful"
   end
 
   context "#cash_out" do
-    it "returns stuff"
+    it "returns the amount to be paid if successful"
+    it "returns false if unsuccessful"
   end
 
   context "#deactivate_card" do
-    it "derps"
+    it "returns the amount to be paid if successuful"
+    it "returns false if unsuccessful"
   end
 
   context "#host_totals" do
@@ -56,11 +60,13 @@ describe Valutec::Card do
   end
 
   context "#sale" do
-    it "transaction-a-fies"
+    it "returns true if successfully charged"
+    it "returns false if not successfully charged"
   end
 
   context "#void" do
-    it "hi"
+    it "returns true if successfully voided"
+    it "returns false if not successfully voided"
   end
 
 end

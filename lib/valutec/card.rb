@@ -19,6 +19,10 @@ module Valutec
       end
     end
 
+    def card_number=(card_num)
+      @card_number = normalize_card_number(card_num)
+    end
+
     def card_balance
       request_params = {
         "ProgramType" => "Gift",
@@ -28,39 +32,77 @@ module Valutec
       binding.pry
     end
 
-    def add_value
+    def add_value(value)
+      request_params = {
+        "ProgramType" => "Gift",
+        "CardNumber" => card_number,
+        "Amount" => value.to_f
+      }
       response = make_api_call('/Transaction_AddValue')
     end
 
-    def activate_card
+    def activate_card(value)
+      request_params = {
+        "ProgramType" => "Gift",
+        "CardNumber" => card_number,
+        "Amount" => value.to_f
+      }
       response = make_api_call('/Transaction_ActivateCard')
     end
 
     def cash_out
+      # this may need :amount defined as well
+      request_params = {
+        "ProgramType" => "Gift",
+        "CardNumber" => card_number,
+      }
       response = make_api_call('/Transaction_CashOut')
     end
 
-    def create_card
+    def self.create_card(amount)
+      request_params = {
+        "ProgramType" => "Gift",
+        "CardNumber" => card_number,
+        "Amount" => amount.to_f
+      }
       response = make_api_call('/Transaction_CreateCard')
     end
 
     def deactivate_card
+      request_params = {
+        "ProgramType" => "Gift",
+        "CardNumber" => card_number,
+      }
       response = make_api_call('/Transaction_DeactivateCard')
     end
 
-    def host_totals
+    def self.host_totals
       response = make_api_call('/Transaction_HostTotals')
     end
 
-    def replace_card
+    def replace_card(new_number)
+      new_number = new_number.to_f
+      request_params = {
+        "ProgramType" => "Gift",
+        "CardNumber" => card_number,
+      }
       response = make_api_call('/Transaction_ReplaceCard')
     end
 
-    def sale
+    def sale(amount)
+      request_params = {
+        "ProgramType" => "Gift",
+        "CardNumber" => card_number,
+        "Amount" => amount.to_f
+      }
       response = make_api_call('/Transaction_Sale')
     end
 
     def void
+      request_params = {
+        "ProgramType" => "Gift",
+        "CardNumber" => card_number,
+      }
       response = make_api_call('/Transaction_Void')
     end
 
@@ -72,7 +114,12 @@ module Valutec
 
 
     def make_api_call(method,params={})
-      params.merge!({"ClientKey" => client_key,"TerminalID" => terminal_id, "ServerID" => server_id, "Identifier" => identifier})
+      params.merge!(
+        {"ClientKey" => client_key,
+          "TerminalID" => terminal_id,
+          "ServerID" => server_id,
+          "Identifier" => identifier}
+        )
       self.class.get(method,{query: params})
     end
 
