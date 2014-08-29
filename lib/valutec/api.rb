@@ -14,6 +14,8 @@ module Valutec
       @terminal_id = ENV['VALUTEC_TERMINAL_ID'] || raise "ENV['VALUTEC_TERMINAL_ID'] not specified, nor is it included in class initialization"
       @server_id = ENV['VALUTEC_SERVER_ID'] || raise "ENV['VALUTEC_SERVER_ID'] not specified, nor is it included in class initialization"
       @identifier = ENV.fetch('VALUTEC_IDENTIFIER', SecureRandom.hex(5))
+
+      Response = Struct.new(:response, :error)
     end
 
     def call(method,params={})
@@ -23,7 +25,8 @@ module Valutec
           "ServerID" => server_id,
           "Identifier" => identifier}
           )
-      self.class.get(method,{query: params})
+      response = self.class.get(method,{query: params})
+      Response.new(response, "No errors detected.")
     end
   end
 end

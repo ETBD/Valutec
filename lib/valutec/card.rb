@@ -4,14 +4,12 @@ module Valutec
     attr_reader :card_number, :api
 
     def initialize(config_vars={})
-
       if config_vars.fetch(:card_number,false)
         @card_number = normalize_card_number(config_vars[:card_number].to_s)
       end
 
       @api = Valutec::Api.instance
     end
-
 
     def card_number=(card_num)
       @card_number = normalize_card_number(card_num)
@@ -23,7 +21,6 @@ module Valutec
         "CardNumber" => card_number,
       }
       response = api.call('/Transaction_CardBalance',request_params)
-      binding.pry
     end
 
     def add_value(value)
