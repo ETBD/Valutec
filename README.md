@@ -1,6 +1,8 @@
 # Valutec
 
-TODO: Write a gem description
+This gem provides an interface to the Valutec Gift Card API, as [documented](https://ws.valutec.net/Valutec.asmx).
+
+
 
 ## Installation
 
@@ -22,7 +24,7 @@ TODO: Write usage instructions here
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/valutec/fork )
+1. Fork it ( https://github.com/etbd/valutec/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
