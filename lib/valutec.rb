@@ -1,7 +1,6 @@
 require "valutec/version"
 require "valutec/card"
 require "valutec/api"
-require "valutec/response"
 require "httparty"
 
 module Valutec
