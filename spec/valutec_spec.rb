@@ -1,4 +1,4 @@
-require 'spec_helper'
+'spec_helper'
 
 describe Valutec do
   let (:valutec) {Valutec}
@@ -9,26 +9,69 @@ describe Valutec do
   end
 
   describe "::card" do
-    context '#card_balance' do
+    context "#card_balance" do
+      it "#result returns the remaining balance of the card"
+      it "#card returns the card"
+      it "#raw_response returns the raw response"
+      it "#result returns false if card doesn't exist / has no value"
     end
-    context '#add_value' do
+
+    context "#add_value" do
+      it "#result returns true if successful"
+      it "#card returns the card"
+      it "#raw_response returns the raw response"
+      it "#result returns false if unsuccessful"
     end
-    context '#activate_card' do
+
+    context "#activate_card" do
+      it "#result returns true if successsful"
+      it "#card returns the card"
+      it "#raw_response returns the raw response"
+      it "returns false if unsuccessful"
     end
-    context '#cash_out' do
+
+    context "#cash_out" do
+      it "#result returns amount of cash owed to customer"
+      it "#raw_response returns the raw response"
+      it "returns false if unsuccessful"
     end
-    context '#create_card' do
+
+    context "#create_card" do
+      it "#result returns true if successful"
+      it "#card returns the card"
+      it "#raw_response returns the raw response"
+      it "returns false if unsuccessful"
     end
-    context '#deactivate_card' do
+
+    context "#deactivate_card" do
+      it "#result returns true if successful"
+      it "#result returns false if unsuccessful"
+      it "#raw_response returns the raw response"
     end
-    context '#host_totals' do
+
+    context "#host_totals" do
     end
-    context '#replace_card' do
+
+    context "#replace_card" do
+      it "#result returns true if successful"
+      it "returns the new card"
+      it "#result returns false if unsuccessful"
+      it "#raw_response returns the raw response"
     end
-    context '#sale' do
+
+    context "#sale" do
+      it "#result returns true if successful"
+      it "#card returns the card"
+      it "#result returns false if unsuccessful"
+      it "#raw_response returns the raw response"
     end
-    context '#void' do
+
+    context "#void" do
+      it "#result returns true if successful"
+      it "#card returns the card"
+      it "#result returns false if unsuccessful"
     end
+
   end
 
 end

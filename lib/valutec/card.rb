@@ -3,9 +3,11 @@ module Valutec
 
     attr_reader :card_number, :api
 
+    Response = Struct.new(:raw_response, :card, :result)
+
     def initialize(config_vars={})
       if config_vars.fetch(:card_number,false)
-        @card_number = normalize_card_number(config_vars[:card_number].to_s)
+        @card_number = normalize_card_number(config_vars[:card_number])
       end
 
       @api = Valutec::Api.instance
@@ -100,7 +102,7 @@ module Valutec
     private
 
     def normalize_card_number(card_number)
-      card_number.gsub(/\W/,'')
+      card_number.to_s.gsub(/\W/,'')
     end
 
   end
