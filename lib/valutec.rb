@@ -8,7 +8,7 @@ module Valutec
   class Report
 
     def initialize
-      "Reporting not implemented yet"
+      raise "Reporting not implemented yet"
     end
 
     def by_card
