@@ -27,20 +27,20 @@ describe Valutec do
       it "#result returns true if successsful"
       it "#card returns the card"
       it "#raw_response returns the raw response"
-      it "returns false if unsuccessful"
+      it "#result returns false if unsuccessful"
     end
 
     context "#cash_out" do
       it "#result returns amount of cash owed to customer"
       it "#raw_response returns the raw response"
-      it "returns false if unsuccessful"
+      it "#result returns false if unsuccessful"
     end
 
     context "#create_card" do
       it "#result returns true if successful"
       it "#card returns the card"
       it "#raw_response returns the raw response"
-      it "returns false if unsuccessful"
+      it "#result returns false if unsuccessful"
     end
 
     context "#deactivate_card" do
