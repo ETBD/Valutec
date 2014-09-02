@@ -21,52 +21,69 @@ describe Valutec::Card do
   end
 
   context '#card_balance' do
-    it "returns card balance as a float if exists" do
+    it "#result returns card balance as a float if exists" do
       stub_request(:get, "https://ws.valutec.net/Valutec.asmx/Transaction_CardBalance").to_return(:body => '49.99', :headers => { 'Content-Type' => 'application/json' })
       expect(valid_card.card_balance).to eq 49.99
     end
-
-    it "returns false if card not exist, or has no balance" do
-      # expect(.card_balance).to be_false
-    end
+    it "#card returns the card"
+    it "#raw_response returns the raw response"
+    it "#result returns false if card doesn't exist / has no value"
   end
 
-  context '#add_value' do
-    it "returns new balance as float if successful"
-    it "returns false if unsuccessful"
+  context "#add_value" do
+    it "#result returns true if successful"
+    it "#card returns the card"
+    it "#raw_response returns the raw response"
+    it "#result returns false if unsuccessful"
   end
 
   context "#activate_card" do
-    it "returns true if activation successful"
-    it "returns false if unsuccessful"
+    it "#result returns true if successsful"
+    it "#card returns the card"
+    it "#raw_response returns the raw response"
+    it "#result returns false if unsuccessful"
   end
 
   context "#cash_out" do
-    it "returns the amount to be paid if successful"
-    it "returns false if unsuccessful"
+    it "#result returns amount of cash owed to customer"
+    it "#raw_response returns the raw response"
+    it "#result returns false if unsuccessful"
+  end
+
+  context "#create_card" do
+    it "#result returns true if successful"
+    it "#card returns the card"
+    it "#raw_response returns the raw response"
+    it "#result returns false if unsuccessful"
   end
 
   context "#deactivate_card" do
-    it "returns the amount to be paid if successuful"
-    it "returns false if unsuccessful"
+    it "#result returns true if successful"
+    it "#result returns false if unsuccessful"
+    it "#raw_response returns the raw response"
   end
 
   context "#host_totals" do
-    it "?????"
   end
 
   context "#replace_card" do
-    it "who knows"
+    it "#result returns true if successful"
+    it "returns the new card"
+    it "#result returns false if unsuccessful"
+    it "#raw_response returns the raw response"
   end
 
   context "#sale" do
-    it "returns true if successfully charged"
-    it "returns false if not successfully charged"
+    it "#result returns true if successful"
+    it "#card returns the card"
+    it "#result returns false if unsuccessful"
+    it "#raw_response returns the raw response"
   end
 
   context "#void" do
-    it "returns true if successfully voided"
-    it "returns false if not successfully voided"
+    it "#result returns true if successful"
+    it "#card returns the card"
+    it "#result returns false if unsuccessful"
   end
 
 end
