@@ -1,13 +1,16 @@
 require "valutec/version"
 require "valutec/card"
 require "valutec/api"
-require "httparty"
 
 module Valutec
-  include HTTParty
-  base_uri 'https://ws.valutec.net/Valutec.asmx'
 
+  # Report will get moved to its own file once implemented
   class Report
+
+    def initialize
+      "Reporting not implemented yet"
+    end
+
     def by_card
     end
 
