@@ -4,22 +4,6 @@ describe Valutec::Card do
   let (:valid_card) {Valutec::Card.new({card_number: '1234-1234-1234-1234-123'})}
   let (:invalid_card) {Valutec::Card.new({card_number: '6666-6666-6666-6666-123'})}
 
-  it "raises if client_key and terminal_id are not specified" do
-    expect{Valutec::Card.new({client_key: '1234',terminal_id: '4321'})}.to_not raise_error
-    expect{Valutec::Card.new({client_key: '1234'})}.to raise_error
-    expect{Valutec::Card.new({terminal_id: '4321'})}.to raise_error
-    expect{Valutec::Card.new}.to raise_error
-
-    ENV['VALUTEC_TERMINAL_ID'] = "derp"
-    ENV['VALUTEC_CLIENT_KEY'] = "doop"
-    ENV['VALUTEC_SERVER_ID'] = "ferp"
-
-    expect{Valutec::Card.new({client_key: '1234',terminal_id: '4321'})}.to_not raise_error
-    expect{Valutec::Card.new({client_key: '1234'})}.to_not raise_error
-    expect{Valutec::Card.new({terminal_id: '4321'})}.to_not raise_error
-    expect{Valutec::Card.new}.to_not raise_error
-  end
-
   context '#card_balance' do
     it "#result returns card balance as a float if exists" do
       stub_request(:get, "https://ws.valutec.net/Valutec.asmx/Transaction_CardBalance").to_return(:body => '49.99', :headers => { 'Content-Type' => 'application/json' })
