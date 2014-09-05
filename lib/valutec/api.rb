@@ -10,8 +10,6 @@ module Valutec
 
     attr_accessor :client_key, :terminal_id, :server_id
 
-    Response = Struct.new(:response, :error)
-
     def initialize(config_vars={})
       @client_key = ENV['VALUTEC_CLIENT_KEY'] || raise("ENV['VALUTEC_CLIENT_KEY'] not specified")
       @terminal_id = ENV['VALUTEC_TERMINAL_ID'] || raise("ENV['VALUTEC_TERMINAL_ID'] not specified, nor is it included in class initialization")
@@ -25,9 +23,7 @@ module Valutec
           "ServerID" => server_id,
           "Identifier" => identifier}
           )
-      response = self.class.get(method,{query: params})
-      # TODO: Use or lose :error variable in Response
-      Response.new(response, "No errors detected.")
+      self.class.get(method,{query: params})
     end
 
     private
