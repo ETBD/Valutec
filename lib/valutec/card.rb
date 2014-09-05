@@ -31,7 +31,7 @@ module Valutec
         "CardNumber" => card_number,
         "Amount" => value.to_f
       }
-      response = api.call('/Transaction_AddValue')
+      response = api.call('/Transaction_AddValue',request_params)
     end
 
     def activate_card(value)
@@ -40,7 +40,7 @@ module Valutec
         "CardNumber" => card_number,
         "Amount" => value.to_f
       }
-      response = api.call('/Transaction_ActivateCard')
+      response = api.call('/Transaction_ActivateCard',request_params)
     end
 
     def cash_out
@@ -49,7 +49,7 @@ module Valutec
         "ProgramType" => "Gift",
         "CardNumber" => card_number,
       }
-      response = api.call('/Transaction_CashOut')
+      response = api.call('/Transaction_CashOut',request_params)
     end
 
     def self.create_card(amount)
@@ -58,7 +58,7 @@ module Valutec
         "CardNumber" => card_number,
         "Amount" => amount.to_f
       }
-      response = api.call('/Transaction_CreateCard')
+      response = api.call('/Transaction_CreateCard',request_params)
     end
 
     def deactivate_card
@@ -66,11 +66,11 @@ module Valutec
         "ProgramType" => "Gift",
         "CardNumber" => card_number,
       }
-      response = api.call('/Transaction_DeactivateCard')
+      response = api.call('/Transaction_DeactivateCard',request_params)
     end
 
     def self.host_totals
-      response = api.call('/Transaction_HostTotals')
+      response = api.call('/Transaction_HostTotals',request_params)
     end
 
     def replace_card(new_number)
@@ -79,7 +79,7 @@ module Valutec
         "ProgramType" => "Gift",
         "CardNumber" => card_number,
       }
-      response = api.call('/Transaction_ReplaceCard')
+      response = api.call('/Transaction_ReplaceCard',request_params)
     end
 
     def sale(amount)
@@ -88,7 +88,7 @@ module Valutec
         "CardNumber" => card_number,
         "Amount" => amount.to_f
       }
-      response = api.call('/Transaction_Sale')
+      response = api.call('/Transaction_Sale',request_params)
     end
 
     def void
@@ -96,7 +96,7 @@ module Valutec
         "ProgramType" => "Gift",
         "CardNumber" => card_number,
       }
-      response = api.call('/Transaction_Void')
+      response = api.call('/Transaction_Void',request_params)
     end
 
     private
