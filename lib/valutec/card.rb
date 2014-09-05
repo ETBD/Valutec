@@ -23,6 +23,7 @@ module Valutec
         "CardNumber" => card_number,
       }
       response = api.call('/Transaction_CardBalance',request_params)
+      Response.new(response,self,resonse["TransactionResponse"]["Balance"].to_f)
     end
 
     def add_value(value)
@@ -69,19 +70,6 @@ module Valutec
       response = api.call('/Transaction_DeactivateCard',request_params)
     end
 
-    def self.host_totals
-      response = api.call('/Transaction_HostTotals',request_params)
-    end
-
-    def replace_card(new_number)
-      new_number = new_number.to_f
-      request_params = {
-        "ProgramType" => "Gift",
-        "CardNumber" => card_number,
-      }
-      response = api.call('/Transaction_ReplaceCard',request_params)
-    end
-
     def sale(amount)
       request_params = {
         "ProgramType" => "Gift",
@@ -91,7 +79,27 @@ module Valutec
       response = api.call('/Transaction_Sale',request_params)
     end
 
+    def self.host_totals
+      raise "Valutec::Card.host_totals not implemented"
+      response = api.call('/Transaction_HostTotals',request_params)
+    end
+
+    def replace_card(new_number)
+      raise "Valutec::Card#replace_card not implemented"
+      new_number = new_number.to_f
+      request_params = {
+        "ProgramType" => "Gift",
+        "CardNumber" => card_number,
+      }
+      response = api.call('/Transaction_ReplaceCard',request_params)
+    end
+
+    def restaurant_sale
+      raise "Valutec::Card#resturant_sale not implemented"
+    end
+
     def void
+      raise "Valutec::Card#void not implemented"
       request_params = {
         "ProgramType" => "Gift",
         "CardNumber" => card_number,

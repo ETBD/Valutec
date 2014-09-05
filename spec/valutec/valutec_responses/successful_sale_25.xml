@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TransactionResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="https://ws.valutec.net/">
+  <RawOutput>%02AUTH%3a72051152%1cBAL%3a+++++25.00%1c7474e07468%03%12%00</RawOutput>
+  <TerminalID>1000000</TerminalID>
+  <IPaddress>127.0.0.2</IPaddress>
+  <Authorized>true</Authorized>
+  <AuthorizationCode>72051152</AuthorizationCode>
+  <TransactionType>Gift</TransactionType>
+  <Balance>25.00</Balance>
+  <PointBalance />
+  <RewardLevel />
+  <Refund />
+  <CardAmountUsed />
+  <AmountDue />
+  <TotalSales />
+  <TotalSales_Amount />
+  <TotalActivations />
+  <TotalActivations_Amount />
+  <TotalAddValues />
+  <TotalAddValues_Amount />
+  <TotalVoids />
+  <TotalVoids_Amount />
+  <TotalDeactivations />
+  <TotalDeactivations_Amount />
+  <Identifier>7474e07468</Identifier>
+  <ErrorMsg />
+  <CardNumber />
+  <CardPIN />
+</TransactionResponse>
