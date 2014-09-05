@@ -6,12 +6,25 @@ describe Valutec::Card do
 
   context '#card_balance' do
     it "#result returns card balance as a float if exists" do
-      stub_request(:get, "https://ws.valutec.net/Valutec.asmx/Transaction_CardBalance").to_return(:body => '49.99', :headers => { 'Content-Type' => 'application/json' })
-      expect(valid_card.card_balance).to eq 49.99
+      stub_request(:any, /.*Transaction_CardBalance.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_card_balance.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.card_balance.result).to eq 50.00
     end
-    it "#card returns the card"
-    it "#raw_response returns the raw response"
-    it "#result returns false if card doesn't exist / has no value"
+    it "#card returns the card" do
+      stub_request(:any, /.*Transaction_CardBalance.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_card_balance.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.card_balance.card).to eq valid_card
+    end
+    it "#raw_response returns the raw response" do
+      stub_request(:any, /.*Transaction_CardBalance.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_card_balance.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.card_balance.raw_response.class).to eq HTTParty::Response
+    end
+    it "#result returns 0.0 if card has no value"  do
+      stub_request(:any, /.*Transaction_CardBalance.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_balance_empty_card.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.card_balance.result).to eq 0.0
+    end
+    it "#result returns 0.0 if card doesn't exist"  do
+      stub_request(:any, /.*Transaction_CardBalance.*/).to_return(:body => File.read("spec/valutec/valutec_responses/unsuccessful_card_not_found.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.card_balance.result).to eq 0.0
+    end
   end
 
   context "#add_value" do
@@ -58,10 +71,22 @@ describe Valutec::Card do
   end
 
   context "#sale" do
-    it "#result returns true if successful"
-    it "#card returns the card"
-    it "#result returns false if unsuccessful"
-    it "#raw_response returns the raw response"
+    it "#result returns true if successful" do
+      stub_request(:any, /.*Transaction_Sale.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_sale_25.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.sale(25).result).to eq true
+    end
+    it "#card returns the card" do
+      stub_request(:any, /.*Transaction_Sale.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_sale_25.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.sale(25).card).to eq valid_card
+    end
+    it "#result returns false if unsuccessful" do
+      stub_request(:any, /.*Transaction_Sale.*/).to_return(:body => File.read("spec/valutec/valutec_responses/unsuccessful_sale_nsf.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.sale(50).card).to eq valid_card
+    end
+    it "#raw_response returns the raw response" do
+      stub_request(:any, /.*Transaction_Sale.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_card_balance.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.sale(50).raw_response.class).to eq HTTParty::Response
+    end
   end
 
   context "#void" do

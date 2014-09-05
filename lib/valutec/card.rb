@@ -23,7 +23,7 @@ module Valutec
         "CardNumber" => card_number,
       }
       response = api.call('/Transaction_CardBalance',request_params)
-      Response.new(response,self,resonse["TransactionResponse"]["Balance"].to_f)
+      Response.new(response,self,response["TransactionResponse"]["Balance"].to_f)
     end
 
     def add_value(value)
@@ -77,6 +77,7 @@ module Valutec
         "Amount" => amount.to_f
       }
       response = api.call('/Transaction_Sale',request_params)
+      Response.new(response,self,!response["TransactionResponse"]["ErrorMsg"])
     end
 
     def self.host_totals
