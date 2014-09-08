@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Valutec::VERSION
   spec.authors       = ["Nikky Southerland"]
   spec.email         = ["nikky@ricksteves.com"]
-  spec.summary       = %q{Provides a wrapper to the Valutec Gift Card API}
-  spec.description   = %q{TODO: This gem does things.}
+  spec.summary       = %q{Provides a wrapper to the Valutec Transaction API}
+  spec.description   = %q{Partial implementation of Valutec Transaction API.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
