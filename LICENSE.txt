@@ -1,4 +1,4 @@
-Copyright (c) 2014 Nikky Southerland
+Copyright (c) 2014 Rick Steves' Europe / Nikky Southerland
 
 MIT License
 
