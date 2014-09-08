@@ -81,6 +81,12 @@ describe Valutec::Card do
     it "#raw_response returns the raw response"
   end
 
+  context "#activate_card" do
+    it "#result returns true if successful"
+    it "#result returns false if unsuccessful"
+    it "#raw_response returns the raw response"
+  end
+
   context "#host_totals" do
   end
 

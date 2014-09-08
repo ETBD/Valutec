@@ -81,6 +81,7 @@ module Valutec
       response = api.call('/Transaction_DeactivateCard',request_params)
     end
 
+
     def sale(amount)
       request_params = {
         "ProgramType" => "Gift",
