@@ -88,11 +88,12 @@ describe Valutec::Card do
   end
 
   context "#host_totals" do
+    it "Does things"
   end
 
   context "#replace_card" do
     it "#result returns true if successful"
-    it "returns the new card"
+    it "#card returns the new card"
     it "#result returns false if unsuccessful"
     it "#raw_response returns the raw response"
   end
