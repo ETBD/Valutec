@@ -33,6 +33,7 @@ module Valutec
         "Amount" => value.to_f
       }
       response = api.call('/Transaction_AddValue',request_params)
+      Response.new(response,self,response["TransactionResponse"]["Authorized"] == "true")
     end
 
     def activate_card(value)

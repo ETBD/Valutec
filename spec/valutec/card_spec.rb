@@ -28,10 +28,22 @@ describe Valutec::Card do
   end
 
   context "#add_value" do
-    it "#result returns true if successful"
-    it "#card returns the card"
-    it "#raw_response returns the raw response"
-    it "#result returns false if unsuccessful"
+    it "#result returns true if successful" do
+      stub_request(:any, /.*Transaction_AddValue.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_add_value.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.add_value(5).result).to eq true
+    end
+    it "#card returns the card" do
+      stub_request(:any, /.*Transaction_AddValue.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_add_value.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.add_value(5).card).to eq valid_card
+    end
+    it "#raw_response returns the raw response" do
+      stub_request(:any, /.*Transaction_AddValue.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_add_value.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.add_value(5).raw_response.class).to eq HTTParty::Response
+    end
+    it "#result returns false if unsuccessful" do
+      stub_request(:any, /.*Transaction_AddValue.*/).to_return(:body => File.read("spec/valutec/valutec_responses/unsuccessful_card_not_found.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.add_value(5).result).to eq false
+    end
   end
 
   context "#activate_card" do
