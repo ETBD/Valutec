@@ -37,15 +37,18 @@ module Valutec
     end
 
     def activate_card(value)
+      raise "Not Implemented"
       request_params = {
         "ProgramType" => "Gift",
         "CardNumber" => card_number,
         "Amount" => value.to_f
       }
       response = api.call('/Transaction_ActivateCard',request_params)
+      # Response.new(response,self,response["TransactionResponse"]["Authorized"] == "true")
     end
 
     def cash_out
+      raise "Not Implemented"
       # this may need :amount defined as well
       request_params = {
         "ProgramType" => "Gift",
@@ -54,16 +57,23 @@ module Valutec
       response = api.call('/Transaction_CashOut',request_params)
     end
 
-    def self.create_card(amount)
+    def create_card(amount)
       request_params = {
         "ProgramType" => "Gift",
-        "CardNumber" => card_number,
+        "CardProgram" => "0xE8A72FDE1E31FF45ADE44460DB4B403B",
         "Amount" => amount.to_f
       }
       response = api.call('/Transaction_CreateCard',request_params)
+      if response["TransactionResponse"]["Authorized"] == "true"
+        new_card = Card.new(card_number: response["TransactionResponse"]["CardNumber"])
+        Response.new(response,new_card,true)
+      else
+        Response.new(response,nil,false)
+      end
     end
 
     def deactivate_card
+      raise "Not Implemented"
       request_params = {
         "ProgramType" => "Gift",
         "CardNumber" => card_number,
@@ -112,7 +122,7 @@ module Valutec
     private
 
     def normalize_card_number(card_number)
-      card_number.to_s.gsub(/\W/,'')
+      card_number.to_s.gsub(/\W/,'').to_i
     end
 
   end

@@ -46,22 +46,31 @@ describe Valutec::Card do
     end
   end
 
-  context "#activate_card" do
-    it "#result returns true if successsful"
-    it "#card returns the card"
-    it "#raw_response returns the raw response"
-    it "#result returns false if unsuccessful"
+  context "#create_card" do
+    it "#result returns true if successsful" do
+      stub_request(:any, /.*Transaction_CreateCard.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_card_creation.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.create_card(5).result).to eq true
+    end
+    it "#card returns the card" do
+      stub_request(:any, /.*Transaction_CreateCard.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_card_creation.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.create_card(5).card.card_number).to eq 123456789123456789
+    end
+    it "#raw_response returns the raw response" do
+      stub_request(:any, /.*Transaction_CreateCard.*/).to_return(:body => File.read("spec/valutec/valutec_responses/successful_card_creation.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.create_card(5).raw_response.class).to eq HTTParty::Response
+    end
+    it "#result returns false if unsuccessful" do
+      stub_request(:any, /.*Transaction_CreateCard.*/).to_return(:body => File.read("spec/valutec/valutec_responses/unsuccessful_duplicate_transaction.xml"), :headers => { 'Content-Type' => 'application/xml' })
+      expect(valid_card.create_card(5).raw_response.class).to eq HTTParty::Response
+    end
+    it "#card returns nil if unsuccessful" do
+       stub_request(:any, /.*Transaction_CreateCard.*/).to_return(:body => File.read("spec/valutec/valutec_responses/unsuccessful_duplicate_transaction.xml"), :headers => { 'Content-Type' => 'application/xml' })
+       expect(valid_card.create_card(5).card).to be_nil
+    end
   end
 
   context "#cash_out" do
     it "#result returns amount of cash owed to customer"
-    it "#raw_response returns the raw response"
-    it "#result returns false if unsuccessful"
-  end
-
-  context "#create_card" do
-    it "#result returns true if successful"
-    it "#card returns the card"
     it "#raw_response returns the raw response"
     it "#result returns false if unsuccessful"
   end
