@@ -37,14 +37,13 @@ module Valutec
     end
 
     def activate_card(value)
-      raise "Not Implemented"
       request_params = {
         "ProgramType" => "Gift",
         "CardNumber" => card_number,
         "Amount" => value.to_f
       }
       response = api.call('/Transaction_ActivateCard',request_params)
-      # Response.new(response,self,response["TransactionResponse"]["Authorized"] == "true")
+      Response.new(response,self,response["TransactionResponse"]["Balance"].to_f == value.to_f)
     end
 
     def cash_out
@@ -73,7 +72,6 @@ module Valutec
     end
 
     def deactivate_card
-      raise "Not Implemented"
       request_params = {
         "ProgramType" => "Gift",
         "CardNumber" => card_number,
