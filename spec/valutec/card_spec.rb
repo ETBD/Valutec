@@ -87,13 +87,11 @@ describe Valutec::Card do
       expect(Valutec::Card.new(card_number: 1999999999).activate_card(50.00).result).to eq true
     end
     it "#result returns false if unsuccessful" do
-      pending # no way to test this atm
+      pending "Not implemented"
       stub_request(:any, /.*Transaction_ActivateCard.*/).to_return(:body => File.read("spec/valutec/valutec_responses/unsuccessful_activate.xml"), :headers => { 'Content-Type' => 'application/xml' })
       expect(Valutec::Card.new(card_number: 1999999999).activate_card(199999999999999,50.00).result).to eq false
     end
-    it "#raw_response returns the raw response" do
-      pending
-    end
+    it "#raw_response returns the raw response"
   end
 
   context "#host_totals" do
