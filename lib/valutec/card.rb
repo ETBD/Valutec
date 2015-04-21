@@ -39,7 +39,7 @@ module Valutec
     def activate_card(value)
       request_params = {
         "ProgramType" => "Gift",
-        "CardNumber" => card_number,
+        "CardNumber" => "%019d" % card_number,
         "Amount" => value.to_f
       }
       response = api.call('/Transaction_ActivateCard',request_params)
@@ -83,7 +83,7 @@ module Valutec
     def sale(amount)
       request_params = {
         "ProgramType" => "Gift",
-        "CardNumber" => card_number,
+        "CardNumber" => "%019d" % card_number,
         "Amount" => amount.to_f
       }
       response = api.call('/Transaction_Sale',request_params)
