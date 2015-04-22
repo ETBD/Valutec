@@ -12,9 +12,9 @@ module Valutec
 
     def initialize(config_vars={})
 
-      @client_key = ENV['VALUTEC_CLIENT_KEY'] || raise("ENV['VALUTEC_CLIENT_KEY'] not specified")
-      @terminal_id = ENV['VALUTEC_TERMINAL_ID'] || raise("ENV['VALUTEC_TERMINAL_ID'] not specified, nor is it included in class initialization")
-      @server_id = ENV['VALUTEC_SERVER_ID'] || raise("ENV['VALUTEC_SERVER_ID'] not specified, nor is it included in class initialization")
+      @client_key = Rails.application.config.try(:valutec_client_key) || ENV['VALUTEC_CLIENT_KEY'] || raise("ENV['VALUTEC_CLIENT_KEY'] not specified")
+      @terminal_id = Rails.application.config.try(:valutec_terminal_id) || ENV['VALUTEC_TERMINAL_ID'] || raise("ENV['VALUTEC_TERMINAL_ID'] not specified, nor is it included in class initialization")
+      @server_id = Rails.application.config.try(:valutec_server_id) || ENV['VALUTEC_SERVER_ID'] || raise("ENV['VALUTEC_SERVER_ID'] not specified, nor is it included in class initialization")
     end
 
     def call(method,params={})
