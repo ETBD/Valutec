@@ -80,13 +80,14 @@ module Valutec
     end
 
 
-    def sale(amount)
+    def sale(amount,params={})
       request_params = {
         "ProgramType" => "Gift",
         "CardNumber" => "%019d" % card_number,
         "Amount" => amount.to_f
       }
-      response = api.call('/Transaction_Sale',request_params)
+      params.merge!(request_params)
+      response = api.call('/Transaction_Sale',params)
       Response.new(response,self,!response["TransactionResponse"]["ErrorMsg"])
     end
 

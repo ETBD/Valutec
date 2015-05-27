@@ -18,12 +18,11 @@ module Valutec
     end
 
     def call(method,params={})
-      params.merge!(
-        {"ClientKey" => client_key,
+      params = {"ClientKey" => client_key,
           "TerminalID" => terminal_id,
           "ServerID" => server_id,
           "Identifier" => identifier}
-          )
+          .merge!(params)
       self.class.get(method,{query: params})
     end
 
